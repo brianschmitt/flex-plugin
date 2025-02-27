@@ -13,7 +13,7 @@ import { ParticipantTypes } from '@twilio/flex-ui/src/state/Participants/partici
 import { AppState } from '../../../../types/manager';
 import { reduxNamespace } from '../../../../utils/state';
 import { StringTemplates } from '../../flex-hooks/strings/BargeCoachAssist';
-import { SupervisorBargeCoachState } from '../../flex-hooks/states/SupervisorBargeCoachSlice';
+import { SupervisorBargeCoachState } from '../../flex-hooks/states/SupervisorBargeCoach';
 import { enterBargeMode, enterCoachMode, enterListenMode } from '../../helpers/bargeCoachHelper';
 
 type SupervisorBargeCoachProps = {
