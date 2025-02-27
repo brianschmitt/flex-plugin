@@ -3,7 +3,7 @@ import * as Flex from '@twilio/flex-ui';
 import { FlexEvent } from '../../../../types/feature-loader';
 import { isAgentAssistanceEnabled, isAgentCoachingPanelEnabled } from '../../config';
 import { SyncDoc } from '../../utils/sync/Sync';
-import { SupervisorBargeCoachState } from '../states/SupervisorBargeCoach';
+import { SupervisorBargeCoachState } from '../states/SupervisorBargeCoachSlice';
 import AppState from '../../../../types/manager/AppState';
 import { reduxNamespace } from '../../../../utils/state';
 
