@@ -1,6 +1,6 @@
 export type ParticipantInviteType = 'Worker' | 'Queue';
 
-export type ParticipantType = 'agent' | 'worker' | 'supervisor' | 'customer';
+export type ParticipantType = 'agent' | 'worker';
 
 export interface WorkerParticipantInvite {
   full_name: string;

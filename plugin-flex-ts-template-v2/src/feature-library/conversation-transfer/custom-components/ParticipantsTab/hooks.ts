@@ -1,8 +1,6 @@
 import * as Flex from '@twilio/flex-ui';
 import { ITask } from '@twilio/flex-ui';
-import { useDispatch } from 'react-redux';
 
-import { setBargeCoachStatus } from '../../../supervisor-barge-coach/flex-hooks/states/SupervisorBargeCoachSlice';
 import {
   InvitedParticipantDetails,
   InvitedParticipants,
@@ -59,20 +57,6 @@ const getCBMParticipantsWrapper = async (task: ITask, flexInteractionChannelSid:
   return [];
 };
 
-export const useParticipantCountEffect = (task: ITask, dispatch: ReturnType<typeof useDispatch>) => {
-  const fetchParticipants = async () => {
-    const flexInteractionChannelSid = task?.attributes?.flexInteractionChannelSid;
-    const participants = await task.getParticipants(flexInteractionChannelSid);
-
-    const count = participants.length;
-    dispatch(setBargeCoachStatus({ interactionParticipants: count }));
-  };
-
-  if (task) {
-    fetchParticipants(); // Call the async function
-  }
-};
-
 // we use a mix of conversation participants (MBxxx sids) and Interactions Participants (UTxxx) to build what we need
 export const getUpdatedParticipantDetails = async (
   task: Flex.ITask,
@@ -93,25 +77,27 @@ export const getUpdatedParticipantDetails = async (
 
   const participants: ParticipantDetails[] = [];
 
-  const interactionParticipants: any[] = await getCBMParticipantsWrapper(task, flexInteractionChannelSid);
+  const intertactionParticipants: any[] = await getCBMParticipantsWrapper(task, flexInteractionChannelSid);
+
+  if (!intertactionParticipants || !conversation?.participants) return participantDetails;
 
   const conversationParticipants = Array.from(conversation?.participants.values());
 
-  logger.debug('[conversation-transfer] getParticipantDetails', { conversationParticipants, interactionParticipants });
+  logger.debug('[conversation-transfer] getParticipantDetails', { conversationParticipants, intertactionParticipants });
 
   conversationParticipants.forEach((conversationParticipant) => {
-    const interactionParticipant = interactionParticipants.find(
+    const intertactionParticipant = intertactionParticipants.find(
       (participant) => participant.mediaProperties?.sid === conversationParticipant.source.sid,
     );
 
-    if (interactionParticipant) {
+    if (intertactionParticipant) {
       const friendlyName =
         conversationParticipant.friendlyName ||
-        interactionParticipant.mediaProperties?.messagingBinding?.address ||
-        interactionParticipant.mediaProperties?.identity;
-      const participantType = interactionParticipant.type;
+        intertactionParticipant.mediaProperties?.messagingBinding?.address ||
+        intertactionParticipant.mediaProperties?.identity;
+      const participantType = intertactionParticipant.type;
       const isMe = conversationParticipant.source.identity === myIdentity;
-      const interactionParticipantSid = interactionParticipant.participantSid;
+      const interactionParticipantSid = intertactionParticipant.participantSid;
       const conversationMemberSid = conversationParticipant.source.sid;
 
       participants.push({
@@ -119,28 +105,6 @@ export const getUpdatedParticipantDetails = async (
         participantType,
         isMe,
         interactionParticipantSid,
-        conversationMemberSid,
-      });
-    }
-  });
-
-  // Add only conversation participants to the array
-  conversationParticipants.forEach((conversationParticipant) => {
-    const existingParticipant = participants.find(
-      (participant) => participant.conversationMemberSid === conversationParticipant.source.sid,
-    );
-
-    if (!existingParticipant) {
-      const friendlyName = conversationParticipant.friendlyName || conversationParticipant.source.identity || 'null';
-      const participantType = 'supervisor';
-      const isMe = conversationParticipant.source.identity === myIdentity;
-      const conversationMemberSid = conversationParticipant.source.sid;
-
-      participants.push({
-        friendlyName,
-        participantType,
-        isMe,
-        interactionParticipantSid: 'null',
         conversationMemberSid,
       });
     }

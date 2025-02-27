@@ -7,7 +7,7 @@ import {
   coach,
   listen,
   setBargeCoachStatus,
-} from '../flex-hooks/states/SupervisorBargeCoach';
+} from '../flex-hooks/states/SupervisorBargeCoachSlice';
 import { isAgentCoachingPanelEnabled } from '../config';
 import { SyncDoc } from '../utils/sync/Sync';
 import { AppState } from '../../../types/manager';
