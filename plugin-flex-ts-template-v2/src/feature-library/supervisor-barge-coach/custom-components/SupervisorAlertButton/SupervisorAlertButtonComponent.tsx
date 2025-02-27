@@ -6,7 +6,7 @@ import { Tooltip } from '@twilio-paste/core/tooltip';
 
 import { reduxNamespace } from '../../../../utils/state';
 import { AppState } from '../../../../types/manager';
-import { setBargeCoachStatus } from '../../flex-hooks/states/SupervisorBargeCoachSlice';
+import { setBargeCoachStatus } from '../../flex-hooks/states/SupervisorBargeCoach';
 import { alertSupervisorsCheck } from '../../helpers/supervisorAlertHelper';
 import { StringTemplates } from '../../flex-hooks/strings/BargeCoachAssist';
 

@@ -1,6 +1,6 @@
 import * as Flex from '@twilio/flex-ui';
 
-import { listen } from '../states/SupervisorBargeCoachSlice';
+import { listen } from '../states/SupervisorBargeCoach';
 import { isAgentCoachingPanelEnabled, isSupervisorMonitorPanelEnabled } from '../../config';
 import { SyncDoc } from '../../utils/sync/Sync';
 import { FlexAction, FlexActionEvent } from '../../../../types/feature-loader';

@@ -2,7 +2,7 @@ import * as Flex from '@twilio/flex-ui';
 
 import { AppState } from '../../../types/manager';
 import { SyncDoc } from '../utils/sync/Sync';
-import { setBargeCoachStatus } from '../flex-hooks/states/SupervisorBargeCoachSlice';
+import { setBargeCoachStatus } from '../flex-hooks/states/SupervisorBargeCoach';
 
 // Clean up Sync Docs and clean up state where applicable
 export const agentBrowserRefresh = (clearCoachingDoc: boolean, clearAssistanceDoc: boolean) => {
@@ -56,5 +56,15 @@ export const supervisorBrowserRefresh = async () => {
     const myWorkerSID = state.flex?.worker?.worker?.sid || '';
     SyncDoc.initSyncDocSupervisors(agentWorkerSID, '', myWorkerSID, '', '', 'remove');
     localStorage.removeItem('agentWorkerSID');
+  }
+  // This is here if the Supervisor refreshes and joined the chatBarge feature
+  const cacheChatBarge = localStorage.getItem('chatBarge');
+  if (cacheChatBarge) {
+    const chatBargeObject = JSON.parse(cacheChatBarge);
+    Flex.Manager.getInstance().store.dispatch(
+      setBargeCoachStatus({
+        chatBarge: [chatBargeObject],
+      }),
+    );
   }
 };

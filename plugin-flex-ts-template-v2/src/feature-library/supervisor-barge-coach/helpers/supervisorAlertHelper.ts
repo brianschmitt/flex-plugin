@@ -1,7 +1,7 @@
 import * as Flex from '@twilio/flex-ui';
 
 import { reduxNamespace } from '../../../utils/state';
-import { setBargeCoachStatus } from '../flex-hooks/states/SupervisorBargeCoachSlice';
+import { setBargeCoachStatus } from '../flex-hooks/states/SupervisorBargeCoach';
 import { AppState } from '../../../types/manager';
 import { SyncDoc } from '../utils/sync/Sync';
 import { NotificationIds } from '../flex-hooks/notifications/BargeCoachAssist';
