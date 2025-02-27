@@ -2,7 +2,7 @@ import * as Flex from '@twilio/flex-ui';
 
 import { AppState } from '../../../types/manager';
 import { SyncDoc } from '../utils/sync/Sync';
-import { setBargeCoachStatus } from '../flex-hooks/states/SupervisorBargeCoach';
+import { setBargeCoachStatus } from '../flex-hooks/states/SupervisorBargeCoachSlice';
 
 // Clean up Sync Docs and clean up state where applicable
 export const agentBrowserRefresh = (clearCoachingDoc: boolean, clearAssistanceDoc: boolean) => {

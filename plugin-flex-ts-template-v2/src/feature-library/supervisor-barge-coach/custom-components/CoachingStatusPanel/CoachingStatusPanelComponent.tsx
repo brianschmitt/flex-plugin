@@ -7,7 +7,7 @@ import { Text } from '@twilio-paste/core/text';
 
 import { AppState } from '../../../../types/manager';
 import { reduxNamespace } from '../../../../utils/state';
-import { SupervisorBargeCoachState } from '../../flex-hooks/states/SupervisorBargeCoach';
+import { SupervisorBargeCoachState } from '../../flex-hooks/states/SupervisorBargeCoachSlice';
 import { StringTemplates } from '../../flex-hooks/strings/BargeCoachAssist';
 
 export const CoachingStatusPanel = () => {
