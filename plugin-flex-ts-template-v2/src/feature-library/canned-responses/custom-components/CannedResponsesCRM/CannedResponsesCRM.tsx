@@ -38,9 +38,14 @@ const CannedResponsesCRM: React.FunctionComponent = () => {
     setSearchText(event.target.value);
   };
 
-  const filteredCategories = responseCategories?.categories.filter((category) =>
-    category.responses.some((response) => response.text.toLowerCase().includes(searchText.toLowerCase())),
-  );
+  const filteredCategories = responseCategories?.categories
+    .map((category) => ({
+      ...category,
+      responses: category.responses.filter((response) =>
+        response.text.toLowerCase().includes(searchText.toLowerCase()),
+      ),
+    }))
+    .filter((category) => category.responses.length > 0);
 
   return (
     <Box as="div" padding="space50">
