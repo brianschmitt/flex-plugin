@@ -168,7 +168,7 @@
         },
         "workflow": "${WORKFLOW_SID}",
         "channel": "${CHAT_CHANNEL_SID}",
-        "attributes": "{ \"selected_queue\": \"{{flow.variables.selected_queue}}\" }"
+        "attributes": "{ \"selected_queue\": \"{{flow.variables.selected_queue}}\",\"from\": \"{{trigger.conversation.ChannelAttributes.pre_engagement_data.email}}\" }"
       }
     },
     {
