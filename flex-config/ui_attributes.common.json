@@ -426,6 +426,10 @@
         "enabled": false,
         "exclude_attributes": [],
         "exclude_queues": []
+      },
+      "recording_callback_url": {
+        "enabled": true,
+        "callback_url": "{{some.url}}/recording-callback-url/update?taskSid={{task.sid}}&workerSid={{worker.sid}}&callSid={{task.attributes.call_sid}}"
       }
     }
   }
